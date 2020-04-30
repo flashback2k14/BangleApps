@@ -19,7 +19,7 @@
     const txtTest2 = document.getElementById("txtTest2");
     document.getElementById("save").addEventListener("click", () => {
       const data = { txtTest1: txtTest1.value, txtTest2: txtTest2.value };
-      Puck.eval(`require("Storage").writeJSON("timerdat",${data})`, () => {
+      Puck.eval(`require("Storage").writeJSON("timerdat.json",${data})`, () => {
         Puck.eval(`Bangle.buzz()`, () => {
           console.log("all done");
         })
