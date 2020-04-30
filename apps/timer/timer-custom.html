@@ -18,7 +18,7 @@
     const txtTest1 = document.getElementById("txtTest1");
     const txtTest2 = document.getElementById("txtTest2");
     document.getElementById("save").addEventListener("click", () => {
-      Util.writeJsonToStorageFile("timerdata", { txtTest1, txtTest2 }, () => {
+      Util.writeJsonToStorageFile("timerdata", { txtTest1: txtTest1.value, txtTest2: txtTest2.value }, () => {
         alert("successfully customized!");
       });
     });
