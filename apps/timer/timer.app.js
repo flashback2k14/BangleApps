@@ -6,7 +6,7 @@ function outOfTime() {
     return;
   }
 
-  const data = require('Storage').readJSON('timer.data', true);
+  const data = require('Storage').readJSON('timerdata', true);
   if (data) {
     E.showMessage('Out of Time', `My Timer: ${data.txtTest1}, ${data.txtTest2}`);
   } else {
