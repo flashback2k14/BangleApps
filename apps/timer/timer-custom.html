@@ -18,24 +18,18 @@
     const txtTest1 = document.getElementById("txtTest1");
     const txtTest2 = document.getElementById("txtTest2");
     document.getElementById("save").addEventListener("click", () => {
-      Util.writeJsonToStorageFile("timerdata", { txtTest1: txtTest1.value, txtTest2: txtTest2.value }, () => {
-        alert("successfully customized!");
-      });
+      // Util.writeJsonToStorageFile("timerdata", { txtTest1: txtTest1.value, txtTest2: txtTest2.value }, () => {
+      //   alert("successfully customized!");
+      // });
+
+      Util.listFiles().then(data => {
+        console.log(data);
+      })
     });
 
     document.getElementById("upload").addEventListener("click", function () {
       sendCustomizedApp({
-        id: "timer",
-        storage: [
-          {
-            name: "timer.app.js",
-            url: "timer.app.js"
-          },
-          {
-            name: "timer.img",
-            url: "timer-icon.js",
-          }
-        ]
+        id: "timer"
       });
     });
   </script>
