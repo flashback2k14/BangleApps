@@ -14,18 +14,16 @@
   </p>
   <script src="../../lib/customize.js"></script>
   <script src="../../lib/interface.js"></script>
-  <script src="../../js/comms.js"></script>
   <script>
     const txtTest1 = document.getElementById("txtTest1");
     const txtTest2 = document.getElementById("txtTest2");
     document.getElementById("save").addEventListener("click", () => {
-      // Util.writeJsonToStorageFile("timerdata", { txtTest1: txtTest1.value, txtTest2: txtTest2.value }, () => {
-      //   alert("successfully customized!");
-      // });
-
-      Comms.listFiles().then(data => {
-        console.log(data);
-      })
+      const data = { txtTest1: txtTest1.value, txtTest2: txtTest2.value };
+      Puck.eval(`require("Storage").writeJSON("timerdat",${data})`, () => {
+        Puck.eval(`Bangle.buzz()`, () => {
+          console.log("all done");
+        })
+      });
     });
 
     document.getElementById("upload").addEventListener("click", function () {
