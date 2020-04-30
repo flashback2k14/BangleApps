@@ -6,7 +6,13 @@ function outOfTime() {
     return;
   }
 
-  E.showMessage('Out of Time', 'My Timer');
+  const data = require('Storage').readJSON('timer.data', true);
+  if (data) {
+    E.showMessage('Out of Time', `My Timer: ${data.txtTest1}, ${data.txtTest2}`);
+  } else {
+    E.showMessage('Out of Time', 'My Timer');
+  }
+
   Bangle.buzz();
   Bangle.beep(200, 4000)
     .then(() => new Promise((resolve) => setTimeout(resolve, 200)))
