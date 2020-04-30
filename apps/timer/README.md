@@ -1,0 +1,3 @@
+# My Timer
+
+- install => profit!

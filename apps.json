@@ -2569,6 +2569,7 @@
     "description": "This is a description of my awesome timer app",
     "allow_emulator": true,
     "tags": "tool",
+    "readme": "README.md",
     "storage": [
       {
         "name": "timer.app.js",
