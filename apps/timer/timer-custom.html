@@ -14,6 +14,7 @@
   </p>
   <script src="../../lib/customize.js"></script>
   <script src="../../lib/interface.js"></script>
+  <script src="../../js/comms.js"></script>
   <script>
     const txtTest1 = document.getElementById("txtTest1");
     const txtTest2 = document.getElementById("txtTest2");
@@ -22,7 +23,7 @@
       //   alert("successfully customized!");
       // });
 
-      Util.listFiles().then(data => {
+      Comms.listFiles().then(data => {
         console.log(data);
       })
     });
