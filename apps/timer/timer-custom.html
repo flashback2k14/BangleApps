@@ -11,26 +11,28 @@
     <button id="upload" class="btn btn-primary">Upload</button>
   </p>
   <script src="../../lib/customize.js"></script>
+  <script src="../../lib/interface.js"></script>
   <script>
     const txtTest1 = document.getElementById("txtTest1");
     const txtTest2 = document.getElementById("txtTest2");
     document.getElementById("upload").addEventListener("click", function () {
-      require("Storage").writeJSON("timer.data", { txtTest1, txtTest2 });
-
-      sendCustomizedApp({
-        id: "timer",
-        storage: [
-          {
-            name: "timer.app.js",
-            url: "timer.app.js"
-          },
-          {
-            name: "timer.img",
-            url: "timer-icon.js",
-            evaluate: true
-          }
-        ]
-      });
+      Util.writeJsonToStorageFile("timer.data", { txtTest1, txtTest2 }, () => {
+        sendCustomizedApp({
+          id: "timer",
+          storage: [
+            {
+              name: "timer.app.js",
+              url: "timer.app.js"
+            },
+            {
+              name: "timer.img",
+              url: "timer-icon.js",
+              evaluate: true
+            }
+          ]
+        });
+        alert("successfully customized!");
+      })
     });
   </script>
 </body>
