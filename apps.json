@@ -2565,7 +2565,7 @@
     "name": "My Timer App",
     "shortName": "My Timer",
     "icon": "assets/timer.png",
-    "version": "0.04",
+    "version": "0.05",
     "description": "This is a description of my awesome timer app",
     "allow_emulator": true,
     "tags": "tool",

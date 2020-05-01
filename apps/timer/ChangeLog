@@ -1,4 +1,5 @@
 0.01: New App!
 0.02: add custom html
 0.03: trying simplify custom app
-0.04: change app structure, custom page saving 
+0.04: change app structure, custom page saving
+0.05: add onInit() hook

@@ -99,7 +99,7 @@ function handleCustomApp(appTemplate) {
                 id: msg.id,
               });
             });
-          } else {
+          } else if (msg.type == 'app' || msg.type == 'widget' || msg.type == 'launch' || msg.type == 'bootloader') {
             var appFiles = event.data;
             var app = {};
             Object.keys(appTemplate).forEach((k) => (app[k] = appTemplate[k]));
