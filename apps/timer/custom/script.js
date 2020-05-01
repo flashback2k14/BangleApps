@@ -8,23 +8,38 @@ window.addEventListener('DOMContentLoaded', () => {
       txtTest2: txtTest2.value,
     };
 
-    sendCustomizedApp({
-      id: 'timer',
-      storage: [
-        {
-          name: 'timer.custom.json',
-          content: JSON.stringify(data),
-        },
-        {
-          name: 'timer.app.js',
-          url: 'app/index.js',
-        },
-        {
-          name: 'timer.img',
-          url: 'assets/timer-icon.js',
-          evaluate: true,
-        },
-      ],
+    // sendCustomizedApp({
+    //   id: 'timer',
+    //   storage: [
+    //     {
+    //       name: 'timer.custom.json',
+    //       content: JSON.stringify(data),
+    //     },
+    //     {
+    //       name: 'timer.app.js',
+    //       url: 'app/index.js',
+    //     },
+    //     {
+    //       name: 'timer.img',
+    //       url: 'assets/timer-icon.js',
+    //       evaluate: true,
+    //     },
+    //   ],
+    // });
+
+    Puck.write('\x03', () => {
+      Puck.eval(`require("Storage").writeJSON("timer.custom.json", ${JSON.stringify(data)})`, (content, err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        if (content === null) {
+          console.error('content === null');
+          return;
+        }
+
+        console.log(content);
+      });
     });
   });
 
