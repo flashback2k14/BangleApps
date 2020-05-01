@@ -27,9 +27,10 @@
         if (result === null) {
           console.error('result === null');
         }
-        Puck.eval(`require('Storage').readJSON('timer.custom.json', 1)`, (content, err) => {
+        Puck.eval('require("Storage").readJSON("timer.custom.json", true)', (content, err) => {
           if (content === null) {
             console.error('content === null');
+            return;
           }
           console.log(content);
         });

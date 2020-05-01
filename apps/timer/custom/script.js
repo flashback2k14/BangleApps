@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     sendCustomizedApp({
       id: 'timer',
+      type: 'app',
       storage: [
         {
           name: 'timer.custom.json',
