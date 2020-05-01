@@ -72,17 +72,12 @@ window.addEventListener('DOMContentLoaded', () => {
           _showMessage(MessageType.ERROR, JSON.stringify(err));
           return;
         }
-        if (content === null) {
-          console.error('content === null');
-          _showMessage(MessageType.ERROR, 'no content found.');
-          return;
-        }
 
         Ui.timerSeconds.value = content['timerSeconds'];
         Ui.textColor.value = content['textColor'];
         Ui.bgColor.value = content['bgColor'];
 
-        Ui.timerSeconds.classList.remove('timerSeconds');
+        Ui.timerSeconds.classList.remove('disabled');
         Ui.textColor.classList.remove('disabled');
         Ui.bgColor.classList.remove('disabled');
         Ui.saveButton.classList.remove('disabled');
