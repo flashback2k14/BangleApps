@@ -74,56 +74,24 @@ function handleCustomApp(appTemplate) {
       iwin.addEventListener(
         'message',
         function (event) {
-          var msg = event.data;
-          if (!msg.type) {
-            msg.type = 'app';
-          }
-
-          if (msg.type == 'eval') {
-            Puck.eval(msg.data, function (result) {
-              iwin.postMessage({
-                type: 'evalrsp',
-                data: result,
-                id: msg.id,
-              });
+          var appFiles = event.data;
+          var app = {};
+          Object.keys(appTemplate).forEach((k) => (app[k] = appTemplate[k]));
+          Object.keys(appFiles).forEach((k) => (app[k] = appFiles[k]));
+          console.log('Received custom app', app);
+          modal.remove();
+          Comms.uploadApp(app)
+            .then(() => {
+              Progress.hide({ sticky: true });
+              resolve();
+            })
+            .catch((e) => {
+              Progress.hide({ sticky: true });
+              reject(e);
             });
-          } else if (msg.type == 'write') {
-            Puck.write(msg.data, function (result) {
-              iwin.postMessage({
-                type: 'writersp',
-                data: result,
-                id: msg.id,
-              });
-            });
-          } else if (msg.type == 'readstoragefile') {
-            Comms.readStorageFile(msg.data /*filename*/).then(function (result) {
-              iwin.postMessage({
-                type: 'readstoragefilersp',
-                data: result,
-                id: msg.id,
-              });
-            });
-          } else if (msg.type == 'app' || msg.type == 'widget' || msg.type == 'launch' || msg.type == 'bootloader') {
-            var appFiles = event.data;
-            var app = {};
-            Object.keys(appTemplate).forEach((k) => (app[k] = appTemplate[k]));
-            Object.keys(appFiles).forEach((k) => (app[k] = appFiles[k]));
-            console.log('Received custom app', app);
-            modal.remove();
-            Comms.uploadApp(app)
-              .then(() => {
-                Progress.hide({ sticky: true });
-                resolve();
-              })
-              .catch((e) => {
-                Progress.hide({ sticky: true });
-                reject(e);
-              });
-          }
         },
         false
       );
-      iwin.postMessage({ type: 'init' });
     };
     iframe.src = `apps/${appTemplate.id}/${appTemplate.custom}`;
   });
