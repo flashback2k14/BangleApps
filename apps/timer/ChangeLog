@@ -3,3 +3,4 @@
 0.03: trying simplify custom app
 0.04: change app structure, custom page saving
 0.05: add onInit() hook
+0.06: instead of uploading, simply save data
