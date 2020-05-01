@@ -47,6 +47,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  _enableUi = () => {
+    Ui.timerSeconds.classList.remove('disabled');
+    Ui.textColor.classList.remove('disabled');
+    Ui.bgColor.classList.remove('disabled');
+    Ui.saveButton.classList.remove('disabled');
+  };
+
   initUiElements = () => {
     Ui = {
       timerSeconds: document.getElementById('timerSeconds'),
@@ -73,14 +80,16 @@ window.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
+        if (!content) {
+          _enableUi();
+          return;
+        }
+
         Ui.timerSeconds.value = content['timerSeconds'];
         Ui.textColor.value = content['textColor'];
         Ui.bgColor.value = content['bgColor'];
 
-        Ui.timerSeconds.classList.remove('disabled');
-        Ui.textColor.classList.remove('disabled');
-        Ui.bgColor.classList.remove('disabled');
-        Ui.saveButton.classList.remove('disabled');
+        _enableUi();
 
         _showMessage(MessageType.SUCCESS, 'successfully loaded.');
       });
