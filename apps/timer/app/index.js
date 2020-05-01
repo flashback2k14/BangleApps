@@ -1,19 +1,19 @@
 let counter;
 let interval;
-let uiConfig;
+let uiConfig = {};
 
 function loadData() {
   const data = require('Storage').readJSON('timer.custom.json', true);
   if (data) {
     counter = data.timerSeconds;
-    uiConfig['timerSeconds'] = data.timerSeconds;
-    uiConfig['textColor'] = data.textColor;
-    uiConfig['bgColor'] = data.bgColor;
+    uiConfig.timerSeconds = data.timerSeconds;
+    uiConfig.textColor = data.textColor;
+    uiConfig.bgColor = data.bgColor;
   } else {
     counter = 6;
-    uiConfig['timerSeconds'] = 6;
-    uiConfig['textColor'] = 0xffff;
-    uiConfig['bgColor'] = 0x0000;
+    uiConfig.timerSeconds = 6;
+    uiConfig.textColor = 0xffff;
+    uiConfig.bgColor = 0x0000;
   }
 }
 
@@ -22,7 +22,7 @@ function outOfTime() {
     return;
   }
 
-  E.showMessage('Out of Time.\nRestart with the middle button.', 'My Timer');
+  E.showMessage('Restart with\nthe\nmiddle button.', 'Out of Time.');
 
   Bangle.buzz();
   Bangle.beep(200, 4000)
@@ -45,8 +45,8 @@ function countDown() {
 
   g.clear();
 
-  g.setColor(uiConfig['textColor'])
-    .setBgColor(uiConfig['bgColor'])
+  g.setColor(uiConfig.textColor)
+    .setBgColor(uiConfig.bgColor)
     .setFontAlign(0, 0)
     .setFont('6x8', 8)
     .drawString(counter, g.getWidth() / 2, g.getHeight() / 2)
@@ -54,7 +54,7 @@ function countDown() {
 }
 
 function startTimer() {
-  counter = uiConfig['timerSeconds'];
+  counter = uiConfig.timerSeconds;
 
   countDown();
   if (!interval) {
