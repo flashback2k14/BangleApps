@@ -1,16 +1,18 @@
 let counter = 6;
 let interval;
+let uiConfig = {};
+
+function loadData() {
+  const data = require('Storage').readJSON('timer.custom.json', true);
+  if (data) {
+    uiConfig['textColor'] = data.textColor;
+    uiConfig['bgColor'] = data.bgColor;
+  }
+}
 
 function outOfTime() {
   if (interval) {
     return;
-  }
-
-  const data = require('Storage').readJSON('timer.custom.json', true);
-  if (data) {
-    E.showMessage(`Out of Time:\n${data.txtTest1},\n${data.txtTest2}`, 'My Timer');
-  } else {
-    E.showMessage('Out of Time', 'My Timer');
   }
 
   Bangle.buzz();
@@ -34,6 +36,9 @@ function countDown() {
 
   g.clear();
 
+  g.setColor(uiConfig['textColor'] || 0xffff);
+  g.setBgColor(uiConfig['bgColor'] || 0x0000);
+
   g.setFontAlign(0, 0);
   g.setFont('6x8', 8);
 
@@ -51,4 +56,5 @@ function startTimer() {
   }
 }
 
+loadData();
 startTimer();

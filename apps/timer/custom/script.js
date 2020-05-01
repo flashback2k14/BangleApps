@@ -1,50 +1,96 @@
 window.addEventListener('DOMContentLoaded', () => {
-  const txtTest1 = document.getElementById('txtTest1');
-  const txtTest2 = document.getElementById('txtTest2');
+  const MessageType = Object.freeze({
+    SUCCESS: 'success',
+    ERROR: 'error',
+  });
+  let Ui;
 
-  document.getElementById('save').addEventListener('click', () => {
+  _showMessage = (type, message) => {
+    const text = type === MessageType.SUCCESS ? Ui.toastSuccessText : Ui.toastErrorText;
+    const container = type === MessageType.SUCCESS ? Ui.toastSuccess : Ui.toastError;
+
+    text.textContent = message;
+    container.classList.remove('d-none');
+    container.classList.add('d-block');
+
+    setTimeout(() => {
+      container.classList.remove('d-block');
+      container.classList.add('d-none');
+      text.textContent = '';
+    }, 3000);
+  };
+
+  _save = () => {
     const data = {
-      txtTest1: txtTest1.value,
-      txtTest2: txtTest2.value,
+      textColor: Ui.textColor.value,
+      bgColor: Ui.bgColor.value,
     };
 
     Puck.write('\x03', () => {
       Puck.eval(`require("Storage").writeJSON("timer.custom.json", ${JSON.stringify(data)})`, (content, err) => {
         if (err) {
           console.error(err);
+          _showMessage(MessageType.ERROR, JSON.stringify(err));
           return;
         }
+
         if (content === null) {
           console.error('content === null');
+          _showMessage(MessageType.ERROR, 'no content found.');
           return;
         }
 
-        alert('successfully saved.');
+        _showMessage(MessageType.SUCCESS, 'successfully saved.');
       });
     });
-  });
+  };
 
-  document.getElementById('upload').addEventListener('click', () => {
+  _upload = () => {
     sendCustomizedApp({
       id: 'timer',
     });
-  });
+  };
+
+  initUiElements = () => {
+    Ui = {
+      textColor: document.getElementById('textColor'),
+      bgColor: document.getElementById('bgColor'),
+      toastSuccess: document.getElementById('toastSuccess'),
+      toastSuccessText: document.getElementById('toastSuccessText'),
+      toastError: document.getElementById('toastError'),
+      toastErrorText: document.getElementById('toastErrorText'),
+      saveButton: document.getElementById('save'),
+      uploadButton: document.getElementById('upload'),
+    };
+  };
+
+  initListeners = () => {
+    Ui.saveButton.addEventListener('click', _save);
+    Ui.uploadButton.addEventListener('click', _upload);
+  };
 
   onInit = () => {
     Puck.write('\x03', () => {
       Puck.eval('require("Storage").readJSON("timer.custom.json", true)', (content, err) => {
         if (err) {
           console.error(err);
+          _showMessage(MessageType.ERROR, JSON.stringify(err));
           return;
         }
         if (content === null) {
           console.error('content === null');
+          _showMessage(MessageType.ERROR, 'no content found.');
           return;
         }
 
-        txtTest1.value = content['txtTest1'];
-        txtTest2.value = content['txtTest2'];
+        Ui.textColor.value = content['textColor'];
+        Ui.bgColor.value = content['bgColor'];
+
+        _showMessage(MessageType.SUCCESS, 'successfully saved.');
       });
     });
   };
+
+  initUiElements();
+  initListeners();
 });

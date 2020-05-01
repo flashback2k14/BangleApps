@@ -2,22 +2,83 @@
 
 <head>
   <link rel="stylesheet" href="../../../css/spectre.min.css">
+  <style>
+    .toast {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      left: 8px;
+      width: 99%;
+    }
+  </style>
 </head>
 
 <body>
   <div class="container">
     <div class="form-group">
-      <label class="form-label" for="txtTest1">Test 1</label>
-      <input class="form-input" type="text" id="txtTest1" placeholder="Test 1">
+      <label class="form-label" for="textColor">Text color</label>
+      <select id="textColor" class="form-select">
+        <option disabled>Choose an option</option>
+        <option value="0x0000">Black</option>
+        <option value="0x000F">Navy</option>
+        <option value="0x03E0">DarkGreen</option>
+        <option value="0x03EF">DarkCyan</option>
+        <option value="0x7800">Maroon</option>
+        <option value="0x780F">Purple</option>
+        <option value="0x7BE0">Olive</option>
+        <option value="0xC618">LightGray</option>
+        <option value="0x7BEF">DarkGrey</option>
+        <option value="0x001F">Blue</option>
+        <option value="0x07E0">Green</option>
+        <option value="0x07FF">Cyan</option>
+        <option value="0xF800">RED</option>
+        <option value="0xF81F">Magenta</option>
+        <option value="0xFFE0">Yellow</option>
+        <option value="0xFFFF">White</option>
+        <option value="0xFD20">Orange</option>
+        <option value="0xAFE5">GreenYellow</option>
+        <option value="0xF81F">Pink</option>
+      </select>
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="txtTest2">Test 2</label>
-      <input class="form-input" type="text" id="txtTest2" placeholder="Test 2">
+      <label class="form-label" for="bgColor">Background color</label>
+      <select id="bgColor" class="form-select">
+        <option disabled>Choose an option</option>
+        <option value="0x0000">Black</option>
+        <option value="0x000F">Navy</option>
+        <option value="0x03E0">DarkGreen</option>
+        <option value="0x03EF">DarkCyan</option>
+        <option value="0x7800">Maroon</option>
+        <option value="0x780F">Purple</option>
+        <option value="0x7BE0">Olive</option>
+        <option value="0xC618">LightGray</option>
+        <option value="0x7BEF">DarkGrey</option>
+        <option value="0x001F">Blue</option>
+        <option value="0x07E0">Green</option>
+        <option value="0x07FF">Cyan</option>
+        <option value="0xF800">RED</option>
+        <option value="0xF81F">Magenta</option>
+        <option value="0xFFE0">Yellow</option>
+        <option value="0xFFFF">White</option>
+        <option value="0xFD20">Orange</option>
+        <option value="0xAFE5">GreenYellow</option>
+        <option value="0xF81F">Pink</option>
+      </select>
     </div>
 
     <button id="upload" class="btn btn-primary" style="float: right;">Upload</button>
     <button id="save" class="btn" style="float: right; margin-right: 12px">Save</button>
+
+    <div class="clearfix"></div>
+
+    <div id="toastSuccess" class="toast toast-success d-none">
+      <span id="toastSuccessText"></span>
+    </div>
+
+    <div id="toastError" class="toast toast-error d-none">
+      <span id="toastErrorText"></span>
+    </div>
   </div>
   <script src="../../../lib/customize.js"></script>
   <script src="../../../lib/interface.js"></script>
