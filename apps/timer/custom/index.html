@@ -32,7 +32,19 @@
       sendCustomizedApp({
         id: "timer",
         storage: [
-          { name: "timer.custom.json", content: JSON.stringify(data) }
+          {
+            name: "timer.custom.json",
+            content: JSON.stringify(data)
+          },
+          {
+            name: "timer.app.js",
+            url: "app/index.js"
+          },
+          {
+            name: "timer.img",
+            url: "assets/timer-icon.js",
+            evaluate: true
+          }
         ]
       });
     });
