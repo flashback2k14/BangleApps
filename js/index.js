@@ -75,6 +75,10 @@ function handleCustomApp(appTemplate) {
         'message',
         function (event) {
           var msg = event.data;
+          if (!msg.type) {
+            msg.type = 'app';
+          }
+
           if (msg.type == 'eval') {
             Puck.eval(msg.data, function (result) {
               iwin.postMessage({

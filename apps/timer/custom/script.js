@@ -10,7 +10,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     sendCustomizedApp({
       id: 'timer',
-      type: 'app',
       storage: [
         {
           name: 'timer.custom.json',
@@ -28,4 +27,24 @@ window.addEventListener('DOMContentLoaded', () => {
       ],
     });
   });
+
+  onInit = () => {
+    Puck.write('\x03', () => {
+      Puck.eval('require("Storage").readJSON("timer.custom.json", true)', (content, err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+        if (content === null) {
+          console.error('content === null');
+          return;
+        }
+
+        console.log(content);
+
+        txtTest1.value = content.txtTest1;
+        txtTest2.value = content.txtTest2;
+      });
+    });
+  };
 });
