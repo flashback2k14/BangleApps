@@ -19,7 +19,23 @@
     <button id="upload" class="btn btn-primary" style="float: right;">Upload</button>
   </div>
   <script src="../../../lib/customize.js"></script>
+  <script src="../../../lib/interface.js"></script>
   <script src="script.js"></script>
+  <script>
+    function onInit() {
+      Puck.write('\x03', (result) => {
+        if (result === null) {
+          console.error('result === null');
+        }
+        Puck.eval(`require('Storage').readJSON('timer.custom.json', 1)`, (content, err) => {
+          if (content === null) {
+            console.error('content === null');
+          }
+          console.log(content);
+        });
+      });
+    }
+  </script>
 </body>
 
 </html>

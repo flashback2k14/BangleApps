@@ -54,7 +54,7 @@ function handleCustomApp(appTemplate) {
         </div>
         <div class="modal-body" style="height:100%">
           <div class="content" style="height:100%">
-            <iframe src="apps/${appTemplate.id}/${appTemplate.custom}" style="width:100%;height:100%;border:0px;">
+            <iframe style="width:100%;height:100%;border:0px;">
           </div>
         </div>
       </div>
@@ -69,27 +69,59 @@ function handleCustomApp(appTemplate) {
     });
 
     var iframe = modal.getElementsByTagName('iframe')[0];
-    iframe.contentWindow.addEventListener(
-      'message',
-      function (event) {
-        var appFiles = event.data;
-        var app = {};
-        Object.keys(appTemplate).forEach((k) => (app[k] = appTemplate[k]));
-        Object.keys(appFiles).forEach((k) => (app[k] = appFiles[k]));
-        console.log('Received custom app', app);
-        modal.remove();
-        Comms.uploadApp(app)
-          .then(() => {
-            Progress.hide({ sticky: true });
-            resolve();
-          })
-          .catch((e) => {
-            Progress.hide({ sticky: true });
-            reject(e);
-          });
-      },
-      false
-    );
+    iframe.onload = function () {
+      var iwin = iframe.contentWindow;
+      iwin.addEventListener(
+        'message',
+        function (event) {
+          var msg = event.data;
+          if (msg.type == 'eval') {
+            Puck.eval(msg.data, function (result) {
+              iwin.postMessage({
+                type: 'evalrsp',
+                data: result,
+                id: msg.id,
+              });
+            });
+          } else if (msg.type == 'write') {
+            Puck.write(msg.data, function (result) {
+              iwin.postMessage({
+                type: 'writersp',
+                data: result,
+                id: msg.id,
+              });
+            });
+          } else if (msg.type == 'readstoragefile') {
+            Comms.readStorageFile(msg.data /*filename*/).then(function (result) {
+              iwin.postMessage({
+                type: 'readstoragefilersp',
+                data: result,
+                id: msg.id,
+              });
+            });
+          } else {
+            var appFiles = event.data;
+            var app = {};
+            Object.keys(appTemplate).forEach((k) => (app[k] = appTemplate[k]));
+            Object.keys(appFiles).forEach((k) => (app[k] = appFiles[k]));
+            console.log('Received custom app', app);
+            modal.remove();
+            Comms.uploadApp(app)
+              .then(() => {
+                Progress.hide({ sticky: true });
+                resolve();
+              })
+              .catch((e) => {
+                Progress.hide({ sticky: true });
+                reject(e);
+              });
+          }
+        },
+        false
+      );
+      iwin.postMessage({ type: 'init' });
+    };
+    iframe.src = `apps/${appTemplate.id}/${appTemplate.custom}`;
   });
 }
 
