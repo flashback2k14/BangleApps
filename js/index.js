@@ -72,14 +72,14 @@ function handleCustomApp(appTemplate) {
     iframe.contentWindow.addEventListener(
       'message',
       function (event) {
-        if (
-          event.data.type !== 'app' ||
-          event.data.type !== 'widget' ||
-          event.data.type !== 'launch' ||
-          event.data.type !== 'bootloader'
-        ) {
-          return;
-        }
+        // if (
+        //   event.data.type !== 'app' ||
+        //   event.data.type !== 'widget' ||
+        //   event.data.type !== 'launch' ||
+        //   event.data.type !== 'bootloader'
+        // ) {
+        //   return;
+        // }
         var appFiles = event.data;
         var app = {};
         Object.keys(appTemplate).forEach((k) => (app[k] = appTemplate[k]));

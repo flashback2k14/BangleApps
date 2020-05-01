@@ -1,0 +1,42 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="../../../css/spectre.min.css">
+</head>
+
+<body>
+  <p>
+    <label for="txtTest1">Test 1</label> <input id="txtTest1" type="text">
+    <label for="txtTest2">Test 2</label> <input id="txtTest2" type="text">
+    <!-- <button id="save" class="btn btn-secondary">Save</button> -->
+
+    <button id="upload" class="btn btn-primary">Upload</button>
+  </p>
+  <script src="../../../lib/customize.js"></script>
+  <script src="../../../lib/interface.js"></script>
+  <script>
+    const txtTest1 = document.getElementById("txtTest1");
+    const txtTest2 = document.getElementById("txtTest2");
+
+    // document.getElementById("save").addEventListener("click", () => {
+    //   const data = { txtTest1: txtTest1.value, txtTest2: txtTest2.value };
+    //   Puck.eval(`require("Storage").writeJSON("timerdat.json",${data})`, () => {
+    //     Puck.eval(`Bangle.buzz()`, () => {
+    //       console.log("all done");
+    //     })
+    //   });
+    // });
+
+    document.getElementById("upload").addEventListener("click", function () {
+      const data = { txtTest1: txtTest1.value, txtTest2: txtTest2.value };
+      sendCustomizedApp({
+        id: "timer",
+        storage: [
+          { name: "timer.custom.json", content: JSON.stringify(data) }
+        ]
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -2564,22 +2564,26 @@
     "id": "timer",
     "name": "My Timer App",
     "shortName": "My Timer",
-    "icon": "timer.png",
-    "version": "0.03",
+    "icon": "assets/timer.png",
+    "version": "0.04",
     "description": "This is a description of my awesome timer app",
     "allow_emulator": true,
     "tags": "tool",
     "readme": "README.md",
-    "custom": "timer-custom.html",
+    "custom": "custom/index.html",
     "storage": [
       {
         "name": "timer.app.js",
-        "url": "timer.app.js"
+        "url": "app/index.js"
       },
       {
         "name": "timer.img",
-        "url": "timer-icon.js",
+        "url": "assets/timer-icon.js",
         "evaluate": true
+      },
+      {
+        "name": "timer.custom.json",
+        "url": "data/custom.json"
       }
     ]
   }
