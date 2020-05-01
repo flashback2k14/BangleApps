@@ -1,9 +1,10 @@
 window.addEventListener('DOMContentLoaded', () => {
+  let Ui;
+
   const MessageType = Object.freeze({
     SUCCESS: 'success',
     ERROR: 'error',
   });
-  let Ui;
 
   _showMessage = (type, message) => {
     const text = type === MessageType.SUCCESS ? Ui.toastSuccessText : Ui.toastErrorText;
@@ -45,12 +46,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  _upload = () => {
-    sendCustomizedApp({
-      id: 'timer',
-    });
-  };
-
   initUiElements = () => {
     Ui = {
       textColor: document.getElementById('textColor'),
@@ -60,13 +55,11 @@ window.addEventListener('DOMContentLoaded', () => {
       toastError: document.getElementById('toastError'),
       toastErrorText: document.getElementById('toastErrorText'),
       saveButton: document.getElementById('save'),
-      uploadButton: document.getElementById('upload'),
     };
   };
 
   initListeners = () => {
     Ui.saveButton.addEventListener('click', _save);
-    Ui.uploadButton.addEventListener('click', _upload);
   };
 
   onInit = () => {
@@ -85,8 +78,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         Ui.textColor.value = content['textColor'];
         Ui.bgColor.value = content['bgColor'];
+        Ui.saveButton.classList.remove('disabled');
 
-        _showMessage(MessageType.SUCCESS, 'successfully saved.');
+        _showMessage(MessageType.SUCCESS, 'successfully loaded.');
       });
     });
   };
