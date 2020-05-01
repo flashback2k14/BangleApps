@@ -24,6 +24,12 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  document.getElementById('upload').addEventListener('click', () => {
+    sendCustomizedApp({
+      id: 'timer',
+    });
+  });
+
   onInit = () => {
     Puck.write('\x03', () => {
       Puck.eval('require("Storage").readJSON("timer.custom.json", true)', (content, err) => {
