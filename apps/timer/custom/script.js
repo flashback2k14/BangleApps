@@ -23,6 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   _save = () => {
     const data = {
+      timerSeconds: Ui.timerSeconds.value,
       textColor: Ui.textColor.value,
       bgColor: Ui.bgColor.value,
     };
@@ -48,6 +49,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   initUiElements = () => {
     Ui = {
+      timerSeconds: document.getElementById('timerSeconds'),
       textColor: document.getElementById('textColor'),
       bgColor: document.getElementById('bgColor'),
       toastSuccess: document.getElementById('toastSuccess'),
@@ -76,9 +78,11 @@ window.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
+        Ui.timerSeconds.value = content['timerSeconds'];
         Ui.textColor.value = content['textColor'];
         Ui.bgColor.value = content['bgColor'];
 
+        Ui.timerSeconds.classList.remove('timerSeconds');
         Ui.textColor.classList.remove('disabled');
         Ui.bgColor.classList.remove('disabled');
         Ui.saveButton.classList.remove('disabled');
