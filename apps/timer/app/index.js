@@ -1,5 +1,5 @@
-var counter = 31;
-var interval;
+let counter = 6;
+let interval;
 
 function outOfTime() {
   if (interval) {
@@ -8,7 +8,7 @@ function outOfTime() {
 
   const data = require('Storage').readJSON('timer.custom.json', true);
   if (data) {
-    E.showMessage(`Out of Time: ${data.txtTest1}, ${data.txtTest2}, ${JSON.stringify(data)}`, 'My Timer');
+    E.showMessage(`Out of Time:\n${data.txtTest1},\n${data.txtTest2}`, 'My Timer');
   } else {
     E.showMessage('Out of Time', 'My Timer');
   }
@@ -17,6 +17,7 @@ function outOfTime() {
   Bangle.beep(200, 4000)
     .then(() => new Promise((resolve) => setTimeout(resolve, 200)))
     .then(() => Bangle.beep(200, 3000));
+
   setTimeout(outOfTime, 10000);
 }
 
@@ -42,14 +43,7 @@ function countDown() {
 }
 
 function startTimer() {
-  counter = 31;
-
-  const data = require('Storage').readJSON('timer.custom.json', true);
-  if (data) {
-    E.showMessage(`Out of Time: ${data.txtTest1}, ${data.txtTest2}, ${JSON.stringify(data)}`, 'My Timer');
-  } else {
-    E.showMessage('Out of Time', 'My Timer');
-  }
+  counter = 6;
 
   countDown();
   if (!interval) {
