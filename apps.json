@@ -2565,12 +2565,12 @@
     "name": "My Timer App",
     "shortName": "My Timer",
     "icon": "assets/timer.png",
-    "version": "0.07",
+    "version": "0.08",
     "description": "This is a description of my awesome timer app",
     "allow_emulator": true,
     "tags": "tool",
     "readme": "README.md",
-    "custom": "custom/index.html",
+    "interface": "custom/index.html",
     "storage": [
       {
         "name": "timer.app.js",
