@@ -78,6 +78,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
         Ui.textColor.value = content['textColor'];
         Ui.bgColor.value = content['bgColor'];
+
+        Ui.textColor.classList.remove('disabled');
+        Ui.bgColor.classList.remove('disabled');
         Ui.saveButton.classList.remove('disabled');
 
         _showMessage(MessageType.SUCCESS, 'successfully loaded.');

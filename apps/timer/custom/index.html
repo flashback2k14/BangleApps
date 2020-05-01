@@ -17,54 +17,12 @@
   <div class="container">
     <div class="form-group">
       <label class="form-label" for="textColor">Text color</label>
-      <select id="textColor" class="form-select">
-        <option disabled>Choose an option</option>
-        <option value="#0000">Black</option>
-        <option value="#000F">Navy</option>
-        <option value="#03E0">DarkGreen</option>
-        <option value="#03EF">DarkCyan</option>
-        <option value="#7800">Maroon</option>
-        <option value="#780F">Purple</option>
-        <option value="#7BE0">Olive</option>
-        <option value="#C618">LightGray</option>
-        <option value="#7BEF">DarkGrey</option>
-        <option value="#001F">Blue</option>
-        <option value="#07E0">Green</option>
-        <option value="#07FF">Cyan</option>
-        <option value="#F800">RED</option>
-        <option value="#F81F">Magenta</option>
-        <option value="#FFE0">Yellow</option>
-        <option value="#FFFF">White</option>
-        <option value="#FD20">Orange</option>
-        <option value="#AFE5">GreenYellow</option>
-        <option value="#F81F">Pink</option>
-      </select>
+      <input class="form-input disabled" id="textColor" type="color">
     </div>
 
     <div class="form-group">
       <label class="form-label" for="bgColor">Background color</label>
-      <select id="bgColor" class="form-select">
-        <option disabled>Choose an option</option>
-        <option value="#0000">Black</option>
-        <option value="#000F">Navy</option>
-        <option value="#03E0">DarkGreen</option>
-        <option value="#03EF">DarkCyan</option>
-        <option value="#7800">Maroon</option>
-        <option value="#780F">Purple</option>
-        <option value="#7BE0">Olive</option>
-        <option value="#C618">LightGray</option>
-        <option value="#7BEF">DarkGrey</option>
-        <option value="#001F">Blue</option>
-        <option value="#07E0">Green</option>
-        <option value="#07FF">Cyan</option>
-        <option value="#F800">RED</option>
-        <option value="#F81F">Magenta</option>
-        <option value="#FFE0">Yellow</option>
-        <option value="#FFFF">White</option>
-        <option value="#FD20">Orange</option>
-        <option value="#AFE5">GreenYellow</option>
-        <option value="#F81F">Pink</option>
-      </select>
+      <input class="form-input disabled" id="bgColor" type="color">
     </div>
 
     <button id="save" class="btn disabled" style="float: right;">Save</button>
@@ -72,10 +30,12 @@
     <div class="clearfix"></div>
 
     <div id="toastSuccess" class="toast toast-success d-none">
-      <span id="toastSuccessText"></span>
+      <i class="icon icon-check"></i>
+      <span id=" toastSuccessText"></span>
     </div>
 
     <div id="toastError" class="toast toast-error d-none">
+      <i class="icon icon-stop"></i>
       <span id="toastErrorText"></span>
     </div>
   </div>
